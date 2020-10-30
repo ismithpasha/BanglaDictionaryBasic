@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<title>Bangla Dictionary with AngularJS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Ismith Pasha">
+        
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+		<!-- JS Libraries -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js" type="text/javascript"></script>
+		<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
+
+		<!-- Angular Scripts -->
+		<script src="script.js" type="text/javascript"></script>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+		
+	</head>
+
+	<body>
+
+			<div ng-controller="PageCtrl">
+
+                <div class="row" style="background:#f3f3f3">
+                    		
+			<br>
+                <div class="container">
+              
+                <div class="pull-left">   
+                
+                    <label  ng-show="language.english" >Search: <input type="text"  ng-model="search.en" placeholder="Search" /> </label>
+                    <label  ng-hide="language.english" >অনুসন্ধান করুন: <input type="text" ng-model="search.bn" placeholder=" খুঁজুন " /> </label>
+			     </div>
+             
+                <div class="pull-right">
+                    <label>Search by:</label>
+                    <label  ng-hide="language.english" class="btn btn-info" ng-click="language.english=true; search.en=''; search.bn='';">English</label>
+                    <label  ng-show="language.english" class="btn btn-success" ng-click="language.english=false; search.bn=''; search.en='';">Bangla</label>
+                </div>
+                
+                </div>
+                	<br>
+			  </div>
+			  
+			  
+		
+			
+
+         <div class="container">   
+         	<h1 ng-hide="language.english"> বাংলা থেকে ইংরেজী </h1>
+			<h1 ng-show="language.english"> English to Bangla </h1>
+                <table class="table table-responsive table-bordered" >
+                    <tr>
+                        <th style="width:50%" ng-hide="language.english"> বাংলা </th>
+                        <th style="width:50%"> English </th>
+                        <th style="width:50%" ng-show="language.english"> বাংলা </th>
+                    </tr>
+                    <tr ng-repeat="item in filtered = items | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                      
+                        <td style="width:50%" ng-hide="language.english">
+                          <span ng-hide="unit.editable">{{ item.bn }}</span>
+                        </td>
+                        <td style="width:50%">
+                          <span ng-hide="unit.editable">{{ item.en }}</span>
+                        </td>
+                       <td style="width:50%" ng-show="language.english">
+                          <span ng-hide="unit.editable">{{ item.bn }}</span>
+                        </td>
+                     
+                    </tr>
+            
+                </table>
+              
+<!--
+			<ul>
+				<li ng-repeat="item in filtered = items | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">{{item.name}}</li>
+			</ul>
+-->
+
+			<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
+			  </div>  
+		</div>
+            
+ <div class="row footer text-center" style="background:#f3f3f3"> 
+ <h4>Developed By - Ismith Pasha, Git Source: <a href="https://github.com/ismithpasha/BanglaDictionaryBasic" target="_blank" >Bangla Dictionary Basic</a>
+  <br> 
+ 
+ </h4>
+ 
+ <p>Dictionary Data Source: https://github.com/MinhasKamal/BengaliDictionary</p>
+ 
+     </div>
+	</body>
+</html>
